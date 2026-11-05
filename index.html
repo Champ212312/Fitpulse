@@ -1,0 +1,658 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>FitPulse - Live Capacity & Check-In System</title>
+
+  <!-- Inline SVG favicon (prevents a 404 on favicon.ico) -->
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%230f172a'/%3E%3Ccircle cx='16' cy='16' r='9' fill='none' stroke='%2310b981' stroke-width='4'/%3E%3C/svg%3E" />
+
+  <!-- Google Fonts: Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@0.468.0"></script>
+
+  <!-- CSS Stylesheet -->
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="login.css" />
+</head>
+<body>
+
+  <section id="landingView" class="landing-view" aria-labelledby="landing-title">
+    <header class="landing-nav">
+      <a class="landing-logo" href="#home" aria-label="FitPulse home">FitPulse</a>
+      <nav aria-label="Landing navigation">
+        <a href="#home">Home</a>
+        <a href="#about">About</a>
+        <a href="#offers">Offers</a>
+        <a href="#contact">Contact</a>
+        <button type="button" class="btn btn-primary" id="openLoginModalBtn">Log In</button>
+      </nav>
+    </header>
+    <main>
+      <section class="hero" id="home" aria-labelledby="landing-title">
+        <div class="hero-video-wrapper" aria-hidden="true">
+          <video class="hero-video" autoplay loop muted playsinline>
+            <source src="assets/videoplayback.webm" type="video/webm">
+          </video>
+          <div class="hero-video-overlay"></div>
+        </div>
+        <div class="container hero-grid">
+          <div class="hero-copy">
+            <p class="eyebrow">FitPulse &middot; Smart Kiosk Systems</p>
+            <h1 class="hero-title" id="landing-title">
+              <span class="hero-title-line">Move better.</span>
+              <span class="hero-title-line highlight">Feel stronger.</span>
+            </h1>
+            <p class="hero-description">
+              A smarter, touchless way to record gym attendance, track real-time facility occupancy, and maintain security logs for Iligan City gyms.
+            </p>
+            <div class="hero-actions">
+              <button type="button" class="btn btn-primary btn-lg" data-open-modal="login">Member / Staff / Admin Login</button>
+              <a class="btn btn-outline btn-lg" href="#about">Learn More</a>
+            </div>
+            <ul class="hero-proof">
+              <li><span class="check" aria-hidden="true">&#10003;</span> 50-Person Capacity Limit</li>
+              <li><span class="check" aria-hidden="true">&#10003;</span> Role-Based Security</li>
+              <li><span class="check" aria-hidden="true">&#10003;</span> Instant Check-In</li>
+            </ul>
+          </div>
+          <div class="hero-media">
+            <div class="hero-media-frame">
+              <div class="hero-status">
+                <span>System Status</span>
+                <span class="status-badge"><span aria-hidden="true">&#9679;</span> Kiosk Ready</span>
+              </div>
+              <div class="capacity-highlight">
+                <span class="capacity-number">50</span>
+                <span class="capacity-label">Max Facility Capacity</span>
+              </div>
+              <div class="security-note">Secure Member, Staff &amp; Admin Access</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- MEMBERSHIP OFFERS -->
+      <section class="section landing-offers" id="offers" aria-labelledby="offers-title">
+        <div class="container">
+          <div class="offers-heading-row">
+            <div class="section-head">
+              <p class="eyebrow">Membership</p>
+              <h2 class="section-title" id="offers-title">Choose Your <span>Plan</span></h2>
+            </div>
+            <p class="offers-description">Simple, honest pricing. Every plan runs for 30 days and unlocks the member portal. Upgrade to coached training whenever you are ready.</p>
+          </div>
+
+          <div class="offers-grid">
+            <article class="offer-card">
+              <p class="offer-type">Core Access</p>
+              <h3>Standard</h3>
+              <p class="offer-summary">Full access to the member portal and training resources.</p>
+              <p class="offer-price">₱600 <span>/ 30 days</span></p>
+              <ul class="offer-benefits">
+                <li>Full gym floor access</li>
+                <li>Locker room &amp; showers</li>
+                <li>Member portal access</li>
+                <li>Open gym hours</li>
+              </ul>
+            </article>
+
+            <article class="offer-card">
+              <p class="offer-type">Student Rate</p>
+              <h3>Student</h3>
+              <p class="offer-summary">Discounted rate for students and young athletes.</p>
+              <p class="offer-price">₱540 <span>/ 30 days</span></p>
+              <ul class="offer-benefits">
+                <li>Everything in Standard</li>
+                <li>Valid student ID required</li>
+                <li>Discounted monthly rate</li>
+                <li>Member portal access</li>
+              </ul>
+            </article>
+
+            <article class="offer-card">
+              <p class="offer-type">Senior Rate</p>
+              <h3>Senior</h3>
+              <p class="offer-summary">Special rate for senior gym members.</p>
+              <p class="offer-price">₱480 <span>/ 30 days</span></p>
+              <ul class="offer-benefits">
+                <li>Everything in Standard</li>
+                <li>Valid senior ID required</li>
+                <li>Low-impact equipment access</li>
+                <li>Member portal access</li>
+              </ul>
+            </article>
+
+            <article class="offer-card offer-card-featured">
+              <p class="offer-type">Best Value</p>
+              <h3>Fitness Training</h3>
+              <p class="offer-summary">Includes 1-on-1 weekly personal coach sessions.</p>
+              <p class="offer-price">₱2,500 <span>/ 30 days</span></p>
+              <ul class="offer-benefits">
+                <li>Everything in Standard</li>
+                <li>1-on-1 weekly coaching</li>
+                <li>Custom training program</li>
+                <li>Progress tracking</li>
+              </ul>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="stats-bar" aria-label="FitPulse system highlights">
+        <div class="container stats-grid">
+          <div class="stat">
+            <span class="stat-number">100%</span>
+            <span class="stat-label">Client-Side Speed</span>
+          </div>
+          <div class="stat">
+            <span class="stat-number">0.2s</span>
+            <span class="stat-label">Check-In Response</span>
+          </div>
+          <div class="stat">
+            <span class="stat-number">3 Roles</span>
+            <span class="stat-label">Member, Staff &amp; Admin Access</span>
+          </div>
+          <div class="stat">
+            <span class="stat-number">24/7</span>
+            <span class="stat-label">Kiosk Operational Mode</span>
+          </div>
+        </div>
+      </section>
+
+      <section class="section landing-about" id="about" aria-labelledby="about-title">
+        <div class="container">
+          <div class="section-head">
+            <p class="eyebrow">System Features</p>
+            <h2 class="section-title" id="about-title">Built for <span>Express Check-In</span></h2>
+          </div>
+          <div class="feature-grid">
+            <article class="feature-card">
+              <h3>01. Member Self Check-In</h3>
+              <p>Fast express check-in interface allowing gym members to record their arrival instantly.</p>
+            </article>
+            <article class="feature-card">
+              <h3>02. Real-Time Occupancy Counter</h3>
+              <p>Live visual progress monitoring current active gym members against maximum facility capacity.</p>
+            </article>
+            <article class="feature-card">
+              <h3>03. Staff Attendance Management</h3>
+              <p>Staff can manage check-ins, check-outs, and the complete attendance history.</p>
+            </article>
+            <article class="feature-card">
+              <h3>04. Protected Admin Actions</h3>
+              <p>Sensitive operations like clearing logs and history require an Administrator password override.</p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="section landing-contact" id="contact" aria-labelledby="contact-title">
+        <div class="container">
+          <div class="section-head">
+            <p class="eyebrow">Visit FitPulse</p>
+            <h2 class="section-title" id="contact-title">Find <span>Our Gym</span></h2>
+          </div>
+          <div class="location-card">
+            <a class="location-image-link"
+               href="https://www.google.com/maps/search/?api=1&amp;query=2nd+Floor+Happy+Mart+Market+Mindanao+Building+General+Aguinaldo+Street+Extension+Pala-o+Iligan+City"
+               target="_blank" rel="noopener noreferrer" aria-label="Open FitPulse location in Google Maps">
+              <img src="images/gym.png" alt="FitPulse gym information" class="contact-rates-image">
+            </a>
+            <div class="location-copy">
+              <p class="eyebrow">Our Location</p>
+              <h3>FitPulse Gym</h3>
+              <p>2nd Floor, Happy Mart Market Mindanao Building, General Aguinaldo Street Extension, Pala-o, Iligan City.</p>
+              <a class="location-map-link"
+                 href="https://www.google.com/maps/search/?api=1&amp;query=2nd+Floor+Happy+Mart+Market+Mindanao+Building+General+Aguinaldo+Street+Extension+Pala-o+Iligan+City"
+                 target="_blank" rel="noopener noreferrer">View Location on Google Maps <span aria-hidden="true">→</span></a>
+            </div>
+          </div>
+        </div>
+      </section>
+  </section>
+
+  <div id="attendanceDashboardView" class="hidden">
+  <!-- Top Navigation Header -->
+  <header class="navbar">
+    <div class="logo">FitPulse</div>
+
+    <nav class="primary-nav" aria-label="Primary navigation">
+      <button type="button" class="nav-link is-active" data-view="dashboard" aria-current="page">
+        <i data-lucide="layout-dashboard" aria-hidden="true"></i>
+        <span>Dashboard</span>
+      </button>
+      <button type="button" class="nav-link" data-view="history">
+        <i data-lucide="history" aria-hidden="true"></i>
+        <span>History</span>
+      </button>
+    </nav>
+
+    <div class="user-profile">
+      <div id="sessionControl">
+        <span id="sessionBadge" class="status-badge"></span>
+        <button type="button" class="btn btn-outline" id="logoutBtn">Switch / Log Out</button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Application Container -->
+  <main class="dashboard-container">
+    <div id="app-content">
+      <!-- DASHBOARD VIEW -->
+      <section id="view-dashboard" class="app-view" aria-labelledby="dashboard-title">
+
+        <!-- Dashboard Header -->
+        <div class="dashboard-header">
+          <h1 id="dashboard-title">MEMBER CHECK-IN DASHBOARD</h1>
+          <p class="subtitle">Live Facility Capacity &amp; Recent Activity</p>
+        </div>
+
+      <!-- Main Grid Layout -->
+      <div class="dashboard-grid">
+
+        <!-- LEFT COLUMN -->
+        <div class="left-column">
+
+          <!-- Live Occupancy Card -->
+          <section class="card occupancy-card">
+            <h2 class="card-title">LIVE OCCUPANCY</h2>
+            <div class="occupancy-display">
+              <div class="ring-container">
+                <svg class="ring-svg" viewBox="0 0 120 120">
+                  <circle class="ring-bg" cx="60" cy="60" r="50"></circle>
+                  <circle id="occupancy-ring" class="ring-progress" cx="60" cy="60" r="50"></circle>
+                </svg>
+                <div class="ring-content">
+                  <span id="active-count" class="count-number">0</span>
+                  <span class="count-label">ACTIVE MEMBERS</span>
+                </div>
+              </div>
+            </div>
+            <p class="capacity-status">
+              FACILITY CAPACITY: <span id="current-capacity">0</span> / <span id="max-capacity">50</span>
+              <span id="capacity-state" class="capacity-state">AVAILABLE</span>
+            </p>
+          </section>
+
+          <!-- Quick Check-In Card -->
+          <section class="card checkin-card">
+            <h2 class="card-title">QUICK CHECK-IN</h2>
+            <form id="checkin-form" class="checkin-form" novalidate>
+              <div class="input-group">
+                <label class="sr-only" for="member-input">Member full name</label>
+                <input
+                  type="text"
+                  id="member-input"
+                  class="name-input"
+                  placeholder="Enter Your Full Name"
+                  required
+                  autocomplete="off"
+                  autocapitalize="words"
+                  spellcheck="false"
+                  inputmode="text"
+                  maxlength="60"
+                  pattern="[A-Za-z][A-Za-z\s'-]*"
+                  aria-describedby="member-input-hint member-input-error"
+                  title="Letters, spaces, hyphens and apostrophes only."
+                />
+                <button type="submit" class="btn btn-primary">
+                  <i data-lucide="user-check"></i> CHECK IN
+                </button>
+              </div>
+              <p id="member-input-hint" class="field-hint">
+                Letters, spaces, hyphens (-) and apostrophes (') only.
+              </p>
+              <p id="member-input-error" class="field-error hidden" role="alert"></p>
+            </form>
+
+            <!-- UI Feedback: Toast Notification removed - replaced by centered greeting modal -->
+          </section>
+
+        </div>
+
+        <!-- RIGHT COLUMN -->
+        <div class="right-column">
+
+          <!-- Recent Attendance Log Table -->
+          <section class="card log-card">
+            <div class="card-header-flex">
+              <h2 class="card-title">RECENT ATTENDANCE LOG</h2>
+
+              <div class="header-tools">
+                <!-- Attendance Search Box -->
+                <div class="search-box">
+                  <label class="sr-only" for="search-input">Search the attendance log</label>
+                  <i data-lucide="search" class="search-icon"></i>
+                  <input
+                    type="text"
+                    id="search-input"
+                    placeholder="Search member or date..."
+                    autocomplete="off"
+                  />
+                </div>
+
+                <!-- Hide the dashboard log without deleting History records -->
+                <button id="btn-clear-logs" type="button" class="btn btn-danger-ghost" title="Clears this dashboard log and resets live occupancy. Attendance history is preserved.">
+                  <i data-lucide="trash-2"></i> CLEAR LOG
+                </button>
+              </div>
+            </div>
+
+            <div class="table-wrapper">
+              <table class="attendance-table">
+                <thead>
+                  <tr>
+                    <th>Date</th>
+                    <th>Name</th>
+                    <th>Checked In</th>
+                    <th>Checked Out</th>
+                  </tr>
+                </thead>
+                <tbody id="attendance-list">
+                  <!-- Log rows will be added dynamically here -->
+                </tbody>
+              </table>
+              <!-- Empty search result state -->
+              <div id="no-results" class="no-results hidden">No records found matching your search.</div>
+            </div>
+          </section>
+
+        </div>
+
+      </div>
+
+      </section>
+
+      <!-- HISTORY VIEW -->
+      <section id="view-history" class="app-view hidden" aria-labelledby="history-title">
+
+        <!-- History Header -->
+        <div class="dashboard-header">
+          <h1 id="history-title">ATTENDANCE HISTORY</h1>
+          <p class="subtitle">Past check-ins grouped by date &middot; Filter by day or search a member</p>
+        </div>
+
+        <!-- History Filters -->
+        <section class="card history-filter-card" aria-label="Attendance history filters">
+          <div class="history-filter-row">
+            <div class="filter-field filter-field-date">
+              <label for="history-date">Filter by date</label>
+              <input type="date" id="history-date" />
+            </div>
+
+            <div class="filter-field filter-field-search">
+              <label class="sr-only" for="history-search">Search attendance history</label>
+              <div class="history-search-box">
+                <i data-lucide="search" class="search-icon" aria-hidden="true"></i>
+                <input
+                  type="text"
+                  id="history-search"
+                  placeholder="Search member name..."
+                  autocomplete="off"
+                />
+              </div>
+            </div>
+
+            <button type="button" id="btn-history-reset" class="btn btn-ghost" disabled>
+              <i data-lucide="rotate-ccw" aria-hidden="true"></i> RESET
+            </button>
+            <button type="button" id="btn-clear-history" class="btn btn-danger-ghost" title="Permanently remove all attendance history records.">
+              <i data-lucide="trash-2" aria-hidden="true"></i> CLEAR HISTORY
+            </button>
+          </div>
+
+          <p id="history-result-summary" class="history-result-summary" aria-live="polite">
+            No check-ins recorded yet.
+          </p>
+        </section>
+
+        <!-- Loading State -->
+        <div id="history-loading" class="history-loading hidden" role="status" aria-live="polite">
+          <span class="sr-only">Loading attendance history&hellip;</span>
+          <div class="skeleton-group" aria-hidden="true">
+            <div class="skeleton-line skeleton-heading"></div>
+            <div class="skeleton-row"></div>
+            <div class="skeleton-row"></div>
+          </div>
+          <div class="skeleton-group" aria-hidden="true">
+            <div class="skeleton-line skeleton-heading short"></div>
+            <div class="skeleton-row"></div>
+            <div class="skeleton-row"></div>
+          </div>
+        </div>
+
+        <!-- Chronological groups are rendered here -->
+        <div id="history-content" class="history-content"></div>
+
+        <!-- Empty State -->
+        <div id="history-empty" class="history-empty hidden" role="status">
+          <div class="empty-icon" aria-hidden="true">
+            <i data-lucide="calendar-x"></i>
+          </div>
+          <h2 id="history-empty-title">No check-in history yet</h2>
+          <p id="history-empty-text">Once members check in, their visits will be grouped here by date.</p>
+          <button type="button" id="btn-history-empty" class="btn btn-primary" data-action="dashboard">
+            <i data-lucide="layout-dashboard"></i> GO TO DASHBOARD
+          </button>
+        </div>
+
+      </section>
+
+      <!-- MEMBER PORTAL: only the signed-in member's plan and attendance -->
+      <section id="memberPortal" class="member-portal hidden" aria-labelledby="member-portal-title">
+        <div class="dashboard-header">
+          <p class="eyebrow">Member Portal</p>
+          <h1 id="member-portal-title">Welcome, <span id="member-portal-name">Member</span></h1>
+          <p class="subtitle">Your membership details and complete attendance history.</p>
+        </div>
+        <div class="member-summary-grid">
+          <section class="card member-plan-card">
+            <p class="card-title">CURRENT MEMBERSHIP</p>
+            <h2 id="member-plan-name">Standard</h2>
+            <p id="member-plan-price" class="member-plan-price">₱600 / 30 days</p>
+            <p id="member-plan-note" class="subtitle">Your selected FitPulse plan.</p>
+          </section>
+          <section class="card member-visits-card">
+            <p class="card-title">TOTAL RECORDED VISITS</p>
+            <strong id="member-visit-count">0</strong>
+            <p class="subtitle">Based on your saved attendance records.</p>
+          </section>
+        </div>
+        <section class="card log-card member-history-card">
+          <div class="card-header-flex">
+            <div>
+              <h2 class="card-title">MY FULL ATTENDANCE HISTORY</h2>
+              <p class="subtitle">All recorded visits associated with your member account.</p>
+            </div>
+          </div>
+          <div class="table-wrapper">
+            <table class="attendance-table">
+              <thead><tr><th>Date</th><th>Checked In</th><th>Checked Out</th><th>Status</th></tr></thead>
+              <tbody id="member-attendance-list"></tbody>
+            </table>
+            <p id="member-no-attendance" class="no-results hidden">No attendance records found for your account yet.</p>
+          </div>
+        </section>
+      </section>
+    </div>
+  </main>
+
+  <!-- Site Footer -->
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <p class="footer-copyright">&copy; 2026 FitPulse Systems. Built for Iligan City Gyms.</p>
+      <p class="footer-status">
+        <span class="status-dot" aria-hidden="true"></span>
+        Status: <strong>Kiosk Active</strong>
+      </p>
+      <p class="footer-credits">Course Project: FitPulse Systems &mdash; Web Systems and Technologies</p>
+    </div>
+  </footer>
+
+  <!-- Checkout Confirmation Warning Modal -->
+  <div id="checkoutModal" class="modal-overlay" role="dialog" aria-modal="true" aria-labelledby="checkout-modal-title" aria-describedby="checkout-modal-desc">
+    <div class="modal-card">
+      <div class="modal-header">
+        <i data-lucide="alert-triangle" class="warning-icon"></i>
+        <h3 id="checkout-modal-title">Confirm Check-Out</h3>
+      </div>
+      <p id="checkout-modal-desc" class="modal-body">
+        Are you sure you want to check out <strong id="modal-member-name">Member</strong>?
+      </p>
+      <div class="modal-actions">
+        <button id="btn-modal-cancel" class="btn btn-secondary-modal">Cancel</button>
+        <button id="btn-modal-confirm" class="btn btn-danger-modal">Yes, Check Out</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Clear Dashboard Log Confirmation Modal -->
+  <div id="clearLogModal" class="modal-overlay" role="alertdialog" aria-modal="true" aria-labelledby="clear-logs-title" aria-describedby="clear-logs-desc">
+    <div class="modal-card modal-card-danger">
+      <div class="modal-header">
+        <i data-lucide="alert-triangle" class="warning-icon"></i>
+        <h3 id="clear-logs-title">Clear Dashboard Log</h3>
+      </div>
+      <p id="clear-logs-desc" class="modal-body">
+        This hides all entries currently shown in the dashboard log and resets <strong>Live Occupancy</strong> to zero. Attendance history is preserved, and no records are deleted from this device.
+      </p>
+      <label class="modal-input-label" for="clear-confirm-input">
+        Type <strong>CLEAR</strong> to confirm:
+      </label>
+      <input
+        type="text"
+        id="clear-confirm-input"
+        class="modal-input"
+        placeholder="CLEAR"
+        autocomplete="off"
+        autocapitalize="characters"
+        spellcheck="false"
+      />
+      <div class="modal-actions">
+        <button id="btn-clear-cancel" class="btn btn-secondary-modal">Cancel</button>
+        <button id="btn-clear-confirm" class="btn btn-danger-modal" disabled>Clear Dashboard Log</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Clear All History Confirmation Modal -->
+  <div id="clear-history-modal" class="modal-overlay hidden" role="alertdialog" aria-modal="true" aria-labelledby="clear-history-title" aria-describedby="clear-history-desc">
+    <div class="modal-card modal-card-danger">
+      <div class="modal-header">
+        <i data-lucide="alert-triangle" class="warning-icon"></i>
+        <h3 id="clear-history-title">Clear all attendance history?</h3>
+      </div>
+      <p id="clear-history-desc" class="modal-body">
+        This action will permanently remove all stored past records. Active members currently checked in on the Dashboard will remain unaffected.
+      </p>
+      <div class="modal-actions">
+        <button id="btn-clear-history-cancel" class="btn btn-secondary-modal">Cancel</button>
+        <button id="btn-clear-history-confirm" class="btn btn-danger-modal">Clear All</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Admin Override Verification Modal -->
+  <div id="adminAuthModal" class="modal-overlay hidden" role="dialog" aria-modal="true" aria-hidden="true" aria-labelledby="admin-auth-title">
+    <div class="modal-panel login-panel admin-auth-panel">
+      <button type="button" class="modal-close" id="closeAdminAuthBtn" data-close-modal aria-label="Close admin verification">&times;</button>
+      <p class="eyebrow">Security Verification</p>
+      <h3 class="modal-title" id="admin-auth-title">Admin Override Required</h3>
+      <p class="modal-text">Staff authorization detected. Enter Administrator Password to approve this action.</p>
+      <form id="adminOverrideForm">
+        <div class="form-group">
+          <label for="adminOverridePassword">Admin Password</label>
+          <input type="password" id="adminOverridePassword" placeholder="Enter Admin Password" required autocomplete="current-password">
+        </div>
+        <p id="adminOverrideError" class="login-error hidden" role="alert"></p>
+        <div class="admin-auth-actions">
+          <button type="button" class="btn btn-outline" id="cancelAdminOverrideBtn" data-close-modal>Cancel</button>
+          <button type="submit" class="btn btn-primary">Confirm Action</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Check-In Greeting Modal -->
+  <div id="checkinModal" class="modal-overlay">
+    <div class="modal-card">
+      <div class="modal-icon">✓</div>
+      <h2 id="modalGreeting">Good morning, Member!</h2>
+      <p class="modal-subtext">You have successfully checked in.</p>
+      <span id="modalTimestamp" class="modal-timestamp">Checked in at 12:00 AM • Today</span>
+      <button id="closeModalBtn" class="btn-primary">DONE</button>
+    </div>
+  </div>
+
+  <!-- Screen-reader announcements for check-in / check-out events -->
+  <div id="live-region" class="sr-only" role="status" aria-live="polite"></div>
+  </div>
+
+  <div id="login-modal" class="modal-overlay" role="dialog" aria-modal="true" aria-labelledby="login-modal-title" aria-describedby="login-modal-text">
+    <div class="modal-panel login-panel">
+      <button type="button" class="modal-close" id="closeLoginModalBtn" aria-label="Close login">&times;</button>
+      <p class="eyebrow">Secure Access</p>
+      <h2 class="modal-title" id="login-modal-title">System <span>Login</span></h2>
+      <p class="modal-text" id="login-modal-text">Select your role to start the attendance session.</p>
+      <form id="loginForm" class="nav-login-form">
+        <div class="form-group">
+          <label for="loginRole">Role</label>
+          <select id="loginRole">
+            <option value="member">Member</option>
+            <option value="staff">Staff Member</option>
+            <option value="admin">Administrator</option>
+          </select>
+        </div>
+        <div class="form-group" id="memberLoginEmailGroup">
+          <label for="loginIdentifier">Member Email</label>
+          <input type="email" id="loginIdentifier" placeholder="Enter your registered email" autocomplete="username">
+        </div>
+        <div class="form-group">
+          <label for="loginPassword">Password / PIN</label>
+          <input type="password" id="loginPassword" placeholder="Enter your password or PIN" required autocomplete="current-password">
+        </div>
+        <p id="loginError" class="login-error hidden" role="alert"></p>
+        <button type="submit" class="btn btn-primary btn-block">LOG IN</button>
+        <button type="button" class="btn btn-outline btn-block register-open-btn" id="openRegisterModalBtn">CREATE MEMBER ACCOUNT</button>
+      </form>
+    </div>
+  </div>
+
+  <div id="register-modal" class="modal-overlay" role="dialog" aria-modal="true" aria-labelledby="register-modal-title" aria-hidden="true">
+    <div class="modal-panel login-panel">
+      <button type="button" class="modal-close" id="closeRegisterModalBtn" aria-label="Close registration">&times;</button>
+      <p class="eyebrow">Join FitPulse</p>
+      <h2 class="modal-title" id="register-modal-title">Create <span>Member Account</span></h2>
+      <form id="registerForm" class="nav-login-form">
+        <div class="form-group"><label for="registerName">Full Name</label><input id="registerName" type="text" required maxlength="60" autocomplete="name"></div>
+        <div class="form-group"><label for="registerEmail">Email Address</label><input id="registerEmail" type="email" required autocomplete="email"></div>
+        <div class="form-group"><label for="registerPassword">Password</label><input id="registerPassword" type="password" required minlength="6" autocomplete="new-password"></div>
+        <div class="form-group"><label for="registerPlan">Membership Plan</label>
+          <select id="registerPlan" required>
+            <option value="Standard">Standard — ₱600 / 30 days</option>
+            <option value="Student">Student — ₱540 / 30 days</option>
+            <option value="Senior">Senior — ₱480 / 30 days</option>
+            <option value="Fitness Training">Fitness Training — ₱2,500 / 30 days</option>
+          </select>
+        </div>
+        <p id="registerError" class="login-error hidden" role="alert"></p>
+        <p id="registerSuccess" class="register-success hidden" role="status"></p>
+        <button type="submit" class="btn btn-primary btn-block">CREATE ACCOUNT</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Initialize Lucide Icons -->
+  <script>
+    lucide.createIcons();
+  </script>
+  <!-- Main Application Logic -->
+  <script src="app.js"></script>
+</body>
+</html>

@@ -1,0 +1,17 @@
+require('dotenv').config();
+const path=require('node:path');
+const express=require('express');
+const helmet=require('helmet');
+const cookieParser=require('cookie-parser');
+const routes=require('./routes');
+const app=express();
+app.disable('x-powered-by');
+app.use(helmet({contentSecurityPolicy:{directives:{defaultSrc:["'self'"],scriptSrc:["'self'","https://unpkg.com"],styleSrc:["'self'","'unsafe-inline'","https://fonts.googleapis.com"],fontSrc:["'self'","https://fonts.gstatic.com"],imgSrc:["'self'","data:"],mediaSrc:["'self'"],connectSrc:["'self'"],objectSrc:["'none'"],frameAncestors:["'none'"]}}}));
+app.use(express.json({limit:'20kb'})); app.use(cookieParser());
+app.use('/api',routes);
+app.get('/api/health',(req,res)=>res.json({status:'ok',service:'FitPulse API'}));
+app.use(express.static(path.resolve(__dirname,'../..')));
+app.use((err,req,res,next)=>{console.error(err);res.status(500).json({error:'An unexpected server error occurred.'});});
+const port=Number(process.env.PORT)||3000;
+if(require.main===module)app.listen(port,()=>console.log(`FitPulse server listening on http://localhost:${port}`));
+module.exports=app;
